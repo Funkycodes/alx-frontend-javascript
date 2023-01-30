@@ -1,10 +1,9 @@
 export default function createIteratorObject(report) {
-  const employeePerDepartment = Object.values(report.allEmployees);
-
-  const employeeIterator = employeePerDepartment.reduce((start, end) => [
-    ...start,
-    ...end,
-  ]);
-  return employeeIterator;
+  return (function* _() {
+    for (const department of Object.values(report.allEmployees)) {
+      for (const employee of department) {
+        yield employee;
+      }
+    }
+  }());
 }
-
